@@ -1,17 +1,19 @@
 'use strict';
+
 //Field
 let field = document.createElement('div');
 document.body.appendChild(field);
 field.classList.add('field');
+
 //Cells
 for (let i = 1; i < 101; i++) {
   let excel = document.createElement('div');
   field.appendChild(excel);
   excel.classList.add('excel');
 }
-//Add coordinates to every cell
-let excel = document.getElementsByClassName('excel');
 
+//Add coordinates to each cell
+let excel = document.getElementsByClassName('excel');
 let x = 1,
   y = 10;
 
@@ -24,19 +26,19 @@ for (let i = 0; i < excel.length; i++) {
   excel[i].setAttribute('posY', y);
   x++;
 }
+
+
 //Let the snake appear at the random position every time the game starts
 //What the Snake is made of - a few cells next to each other, with a new class name
-
 function generateSnake() {
-  //The function returns two random values between 1 and 10 in  an Array- PosX and PosY
+  //The function returns two random values between 1 and 10 in an Array- PosX and PosY
   let posX = Math.round(Math.random() * (10 - 3) + 3);
-  //Минимальное значение по позиции Х должно быть 3. иначе происходит ошибка- несуществующие координаты.
-  let posY = Math.round(Math.random() * (10 - 1) + 1);
+  //Minimal value of posX has to be equak to 3- otherwise there will be an error because of non-existing coordinates.
   return [posX, posY];
 }
-
 let coordinates = generateSnake();
-//Ищем ячейку
+
+//Find the appropriate cell:
 let snakeBody = [
   document.querySelector(
     '[posX = "' + coordinates[0] + '"][posY = "' + coordinates[1] + '"]'
@@ -46,20 +48,20 @@ let snakeBody = [
   ),
   document.querySelector(
     '[posX = "' + (coordinates[0] - 2) + '"][posY = "' + coordinates[1] + '"]'
-  ) // Чтобы переменные не превратились в обычную строку мы используем эту конструкцию " ' + переменная + ' "
-]; //Array with 3 elements- 3 nex-to-each-other cells.
+  )
+];
+//To stop variables from turning into a string- we use this construction- " ' + variable + ' "
+//Array with 3 elements- 3 nex-to-each-other cells.
 
+//Put the snakeBody in a Loop
 for (
-  //Add class snakeBody in a Loop
-  let i = 0;
-  i < snakeBody.length;
-  i++
+  let i = 0; i < snakeBody.length; i++
 ) {
   snakeBody[i].classList.add('snakeBody');
 }
 snakeBody[0].classList.add('head');
 
-//Mouse- random position NOT taken by the snake.
+//Mouse- to appear on a random position NOT taken by the snake.
 let mouse;
 
 function createMouse() {
@@ -72,20 +74,21 @@ function createMouse() {
   //console.log(mouseCoordinates);
   mouse = document.querySelector(
     '[posX = "' +
-      mouseCoordinates[0] +
-      '"][posY = "' +
-      mouseCoordinates[1] +
-      '"]'
+    mouseCoordinates[0] +
+    '"][posY = "' +
+    mouseCoordinates[1] +
+    '"]'
   );
-  //Цикл while- пока мышь занимает те же координаты что и змея- должна генерироваться новая мышь- пока она не встанет на свободную от змеи ячейку
+
+  //While loop- while the mouse is on the same coordinate cell as the snake- new mice have to keep generating until they take an empty cell.
   while (mouse.classList.contains('snakeBody')) {
     generateMouse();
     mouse = document.querySelector(
       '[posX = "' +
-        mouseCoordinates[0] +
-        '"][posY = "' +
-        mouseCoordinates[1] +
-        '"]'
+      mouseCoordinates[0] +
+      '"][posY = "' +
+      mouseCoordinates[1] +
+      '"]'
     );
   }
   mouse.classList.add('mouse');
@@ -103,8 +106,9 @@ display: block;
 `;
 let score = 0;
 input.value = `Total score: ${score}`;
-//Make the snake MOVE
 
+
+//Make the snake MOVE
 let direction = 'right';
 let steps = false;
 
@@ -123,10 +127,10 @@ function move() {
       snakeBody.unshift(
         document.querySelector(
           '[posX = "' +
-            (+snakeCoordinates[0] + 1) +
-            '"][posY = "' +
-            snakeCoordinates[1] +
-            '"]'
+          (+snakeCoordinates[0] + 1) +
+          '"][posY = "' +
+          snakeCoordinates[1] +
+          '"]'
         )
       );
     } else {
@@ -145,10 +149,10 @@ function move() {
       snakeBody.unshift(
         document.querySelector(
           '[posX = "' +
-            (+snakeCoordinates[0] - 1) +
-            '"][posY = "' +
-            snakeCoordinates[1] +
-            '"]'
+          (+snakeCoordinates[0] - 1) +
+          '"][posY = "' +
+          snakeCoordinates[1] +
+          '"]'
         )
       );
     } else {
@@ -166,10 +170,10 @@ function move() {
       snakeBody.unshift(
         document.querySelector(
           '[posX = "' +
-            snakeCoordinates[0] +
-            '"][posY = "' +
-            (+snakeCoordinates[1] + 1) +
-            '"]'
+          snakeCoordinates[0] +
+          '"][posY = "' +
+          (+snakeCoordinates[1] + 1) +
+          '"]'
         )
       );
     } else {
@@ -190,7 +194,7 @@ function move() {
           snakeCoordinates[0] +
           '"][posY = "' +
           (+snakeCoordinates[1] - 1) + //////+++++
-            '"]'
+          '"]'
         )
       );
     } else {
@@ -202,10 +206,10 @@ function move() {
     }
   }
 
-  //Teach him to eat mice :) когда змея и мышь- их координаты совпадут- то мышь изчезает, змея увеличивается на 1 ячейку- и появляется новая мышь.
+  //Teach the Snake to eat mice :) when the snake and the mice are on the same cooridantes- the mouse has to dissappear, the snake becomes +1 cell longer- and another mouse is randomly generated.
+  //Run and check the 
+  //if PositionX of SnakeHead == PositionX of the mouse-
 
-  //Проверка условия- если координаты головы совпадают с координатами мыши- у мыши удаляется класс mouse, она исчезает с площадки, продублировать последний элемент из змеиного тела- и запушить его в конец. snakeBody[0] - its the head!
-  //Если POsX головы равен posX мыши-
 
   if (
     snakeBody[0].getAttribute('posX') === mouse.getAttribute('posX') &&
@@ -221,7 +225,8 @@ function move() {
     score++;
     input.value = `Total score: ${score}`;
   }
-  //Пропись окончания игры- если голова змеи упрется в ячейку с уже имеющимся классом snakeBody
+
+  //Code the end of game- ehrn snakeHead gets onto a cell that already has snakeBody class.
   if (snakeBody[0].classList.contains('snakeBody')) {
     setTimeout(() => {
       alert(`Game Over :( Total score: ${score}`);
@@ -232,13 +237,12 @@ function move() {
     snakeBody[0].style.background = 'url(CatScream.jpg)';
     snakeBody[0].style.backgroundSize = 'cover';
   }
-  //Kolduem!
+
+  //the magic begins!
   snakeBody[0].classList.add('head');
   for (
-    //Add class snakeBody in a Loop
-    let i = 0;
-    i < snakeBody.length;
-    i++
+    //Put "class snakeBody" in a Loop
+    let i = 0; i < snakeBody.length; i++
   ) {
     snakeBody[i].classList.add('snakeBody');
   }
@@ -247,8 +251,10 @@ function move() {
 }
 
 let interval = setInterval(move, 300);
-// Работа с обработчиком событий. При нажатии кнопок вверх, вниз, вправо, влево- должно что-то происходить меняться направление.
-window.addEventListener('keydown', function(e) {
+
+// Work with eventListener. Something has to happen- direction changes when these buttons are clicked- up, down, left, right.
+//e.Keycodes- Left - 37; Up - 38; Right - 39; Down - 40.
+window.addEventListener('keydown', function (e) {
   if (steps == true) {
     if (e.keyCode == 37 && direction !== 'right') {
       direction = 'left';
@@ -264,5 +270,4 @@ window.addEventListener('keydown', function(e) {
       steps = false;
     }
   }
-  //Код Влево-37. вправо-39. вверх-38. вниз-40.
 });
