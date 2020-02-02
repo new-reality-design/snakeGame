@@ -33,10 +33,11 @@ for (let i = 0; i < excel.length; i++) {
 function generateSnake() {
   //The function returns two random values between 1 and 10 in an Array- PosX and PosY
   let posX = Math.round(Math.random() * (10 - 3) + 3);
-  //Minimal value of posX has to be equak to 3- otherwise there will be an error because of non-existing coordinates.
+  //Minimal value of posX has to be equal to 3- otherwise there will be an error because of non-existing coordinates.
   let posY = Math.round(Math.random() * (10 - 1) + 1);
   return [posX, posY];
 }
+
 let coordinates = generateSnake();
 
 //Find the appropriate cell:
