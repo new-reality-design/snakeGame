@@ -95,6 +95,36 @@ function createMouse() {
 }
 createMouse();
 
+
+//Rules
+
+let rules = document.createElement('paragraph');
+document.body.appendChild(rules);
+// rules.classList.add('.rules-style');
+rules.style.cssText = `
+margin: auto;
+margin-top: 40px;
+font-size: 20px;
+font-family: 'Calibri';
+display: block;
+width: 500px;
+text-align: center;
+text-transform: uppercase;
+font-weight: bold;
+`;
+rules.innerHTML = `
+Keep chasing and eating mice!<br><br> For every mouse you catch - you will get 1 point.<br> Remember, there are no boundaries in this maze.<br> The game will stop once the snake bites itself -<br> or there is nowhere else to grow.<br> Good luck ^_^
+`;
+
+
+// 'Keep catching and eating mice!<br> For every mice you catch - you get 1 point.<br> Remember, there are no boundaries in the maze.<br> The game will only stop once the snake bites itself or there is nowhere else to frow.<br> Good luck ^_^';
+// rules.innerHTML += 'Keep catching and eating mice!';
+// rules.innerHTML += 'For every mice you catch - you will get 1 point.';
+// rules.innerHTML += 'Remember, there are no boundaries in the maze.';
+// rules.innerHTML += 'The game will stop once the snake bites itself or there is nowhere else to grow.';
+// rules.innerHTML += 'Good luck ^_^';
+
+
 //Points Count
 let input = document.createElement('input');
 document.body.appendChild(input);
