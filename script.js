@@ -53,7 +53,7 @@ let snakeBody = [
   )
 ];
 //To stop variables from turning into a string- we use this construction- " ' + variable + ' "
-//Array with 3 elements- 3 nex-to-each-other cells.
+//Array with 3 elements- 3 next-to-each-other cells.
 
 //Put the snakeBody in a Loop
 for (
@@ -85,15 +85,13 @@ function createMouse() {
   //While loop- while the mouse is on the same coordinate cell as the snake- new mice have to keep generating until they take an empty cell.
   while (mouse.classList.contains('snakeBody')) {
     generateMouse();
-    mouse = document.querySelector(
-      '[posX = "' +
-      mouseCoordinates[0] +
-      '"][posY = "' +
-      mouseCoordinates[1] +
+    mouse = document.querySelector('[posX = "' + mouseCoordinates[0] + '"][posY = "' + mouseCoordinates[1] +
       '"]'
     );
+    break;
   }
   mouse.classList.add('mouse');
+
 }
 createMouse();
 
@@ -252,7 +250,7 @@ function move() {
   steps = true;
 }
 
-let interval = setInterval(move, 300);
+let interval = setInterval(move, 200);
 
 // Work with eventListener. Something has to happen- direction changes when these buttons are clicked- up, down, left, right.
 //e.Keycodes- Left - 37; Up - 38; Right - 39; Down - 40.
